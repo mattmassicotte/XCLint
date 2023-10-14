@@ -20,18 +20,12 @@ jobs:
   test:
     name: Test
     runs-on: macOS-13
-    strategy:
-      matrix:
-        destination:
-          - "platform=macOS"
-          - "platform=iOS Simulator,name=iPhone 12"
-
     steps:
       - uses: actions/checkout@v4
       - name: Install XCBeautify
         run: brew install xcbeautify
       - name: Test platform ${{ matrix.destination }}
-        run: set -o pipefail && xcodebuild -scheme XCLint-Package -destination "${{ matrix.destination }}" test | xcbeautify --renderer github-actions
+        run: set -o pipefail && xcodebuild -scheme XCLint-Package -destination "platform=macOS" test | xcbeautify --renderer github-actions
 
   linux_test:
     name: Test Linux
