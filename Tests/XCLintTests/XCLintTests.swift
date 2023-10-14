@@ -1,5 +1,5 @@
 import XCTest
-import XCLint
+import XCLinting
 
 final class XCLintTests: XCTestCase {
 	func testExample() throws {
