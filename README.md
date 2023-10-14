@@ -24,9 +24,9 @@ targets: [
 
 I was kind of hoping that some else had built something like this. And they have! However, none of the things I found are maintained any more.
 
-- (ProjLint)[https://github.com/JamitLabs/ProjLint]
-- (XcodeProjLint)[https://github.com/RocketLaunchpad/XcodeProjLint]
-- (xcprojectlint)[https://github.com/americanexpress/xcprojectlint]
+- [ProjLint](https://github.com/JamitLabs/ProjLint)
+- [XcodeProjLint](https://github.com/RocketLaunchpad/XcodeProjLint)
+- [xcprojectlint](https://github.com/americanexpress/xcprojectlint)
 
 ## Contributing and Collaboration
 
