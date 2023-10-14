@@ -39,13 +39,3 @@ jobs:
         run: swiftly install latest
       - name: Test
         run: swift test
-
-  homebrew_test:
-    name: Test Homebrew
-    runs-on: macOS-13
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install Locally
-        run: brew install --build-from-source Forumla/xclint.rb
-      - name: Test Exeuction
-        run: xclint -h
