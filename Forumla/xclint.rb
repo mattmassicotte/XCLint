@@ -5,11 +5,10 @@ class Xclint < Formula
   head "https://github.com/mattmassicotte/XCLint", branch: "main"
   version "0.1.0"
 
-  depends_on :xcode => ["14.0", :build]
+  depends_on :xcode => ["15.0", :build]
 
   def install
-    system "swift", "build", "-c", "release", "--disable-sandbox"
-    system "install", "-d", "#{prefix}/bin"
-    system "install", ".build/release/xclint", "#{prefix}/bin"
+    system "xcrun", "swift", "build", "-c", "release", "--disable-sandbox"
+    bin.install ".build/release/xclint"
   end
 end
