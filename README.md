@@ -1,0 +1,2 @@
+# xclint
+Xcode project linting
