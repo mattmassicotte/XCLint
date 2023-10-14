@@ -13,9 +13,13 @@ let package = Package(
 	dependencies: [
 		.package(url: "https://github.com/tuist/XcodeProj", from: "8.15.0"),
 		.package(url: "https://github.com/mattmassicotte/XCConfig", branch: "main"),
+		.package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.3"),
 	],
 	targets: [
-		.executableTarget(name: "clitool", dependencies: ["XCLinting"]),
+		.executableTarget(name: "clitool", dependencies: [
+			"XCLinting",
+			.product(name: "ArgumentParser", package: "swift-argument-parser"),
+		]),
 		.target(name: "XCLinting", dependencies: ["XCConfig", "XcodeProj"]),
 		.testTarget(name: "XCLintTests", dependencies: ["XCLinting"]),
 
