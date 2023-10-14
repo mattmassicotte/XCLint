@@ -40,7 +40,7 @@ jobs:
       - name: Test
         run: swift test
 
-  test:
+  homebrew_test:
     name: Test Homebrew
     runs-on: macOS-13
     steps:
