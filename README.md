@@ -1,8 +1,9 @@
 [![Build Status][build status badge]][build status]
 
 # XCLint
-
 Xcode project linting
+
+This project is currently very WIP.
 
 ## Installation
 
