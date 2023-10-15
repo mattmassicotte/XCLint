@@ -9,7 +9,10 @@ This project is currently very WIP.
 
 XCLint is available as both a commandline tool and a library.
 
-**CLI tool forthcoming**
+```
+brew tap mattmassicotte/XCLint https://github.com/mattmassicotte/XCLint.git
+brew install xclint
+```
 
 ```swift
 dependencies: [
