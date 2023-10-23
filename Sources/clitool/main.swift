@@ -33,7 +33,7 @@ struct XCLintCommand: ParsableCommand {
 		}
 
 		// find the effective environment
-		let config = try resolvedConfiguration(projectRootURL: URL(filePath: projPath))
+		let config = try resolvedConfiguration(projectRootURL: URL(fileURLWithPath: projPath))
 		let env = try XCLinter.Environment(projectPath: projPath, configuration: config)
 
 		let linter = XCLinter(environment: env)
@@ -67,7 +67,7 @@ extension XCLintCommand {
 
 	private func resolvedConfigFileURL(projectRootURL: URL) -> URL? {
 		if let path = configFilePath {
-			return URL(filePath: path, directoryHint: .notDirectory)
+			return URL(fileURLWithPath: path, isDirectory: false)
 		}
 
 		let defaultURL = projectRootURL.deletingLastPathComponent().appending(component: ".xclint.yml")

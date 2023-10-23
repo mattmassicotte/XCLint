@@ -48,7 +48,7 @@ extension XCLinter.Environment {
 			throw XCLintError.noProjectFileSpecified
 		}
 
-		let url = URL(filePath: projectPath)
+		let url = URL(fileURLWithPath: projectPath)
 		let xcodeproj = try XcodeProj(pathString: projectPath)
 
 		self.init(project: xcodeproj, projectRootURL: url, configuration: configuration)
