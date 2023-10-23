@@ -70,8 +70,8 @@ extension XCLintCommand {
 			return URL(fileURLWithPath: path, isDirectory: false)
 		}
 
-		let defaultURL = projectRootURL.deletingLastPathComponent().appending(component: ".xclint.yml")
-		let path = defaultURL.path(percentEncoded: true)
+		let defaultURL = projectRootURL.deletingLastPathComponent().appendingPathComponent(".xclint.yml", isDirectory: false)
+		let path = defaultURL.path
 
 		guard FileManager.default.isReadableFile(atPath: path) else {
 			return nil
