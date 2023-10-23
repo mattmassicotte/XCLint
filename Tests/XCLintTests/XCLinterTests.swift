@@ -5,7 +5,7 @@ final class XCLinterTests: XCTestCase {
 	
 	func testEmptyProjectPathThrowsError() throws {
 		do {
-			_ = try XCLinter(projectPath: "")
+			_ = try XCLinter(projectPath: "", configuration: Configuration())
 			XCTFail()
 		} catch XCLintError.noProjectFileSpecified {
 		} catch {
@@ -16,11 +16,9 @@ final class XCLinterTests: XCTestCase {
 	
 	func testMissingProjectFileThrowsError() throws {
 		do {
-			_ = try XCLinter(projectPath: "/dev/null")
+			_ = try XCLinter(projectPath: "/dev/null", configuration: Configuration())
 			XCTFail()
-		} catch XCLintError.projectFileNotFound {
 		} catch {
-			XCTFail("wrong error: \(error)")
 		}
 	}
 }

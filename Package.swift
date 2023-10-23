@@ -14,14 +14,22 @@ let package = Package(
 		.package(url: "https://github.com/tuist/XcodeProj", from: "8.15.0"),
 		.package(url: "https://github.com/mattmassicotte/XCConfig", branch: "main"),
 		.package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.3"),
+		.package(url: "https://github.com/jpsim/Yams.git", from: "5.0.0"),
 	],
 	targets: [
 		.executableTarget(name: "clitool", dependencies: [
 			"XCLinting",
 			.product(name: "ArgumentParser", package: "swift-argument-parser"),
+			"Yams"
 		]),
 		.target(name: "XCLinting", dependencies: ["XCConfig", "XcodeProj"]),
-		.testTarget(name: "XCLintTests", dependencies: ["XCLinting"]),
+		.testTarget(
+			name: "XCLintTests",
+			dependencies: ["XCLinting", "XcodeProj"],
+			resources: [
+				.copy("TestData"),
+			]
+		),
 
 	]
 )
