@@ -9,10 +9,14 @@ This project is currently very WIP.
 
 XCLint is available as both a commandline tool and a library.
 
+Tool:
+
 ```
 brew tap mattmassicotte/XCLint https://github.com/mattmassicotte/XCLint.git
 brew install xclint
 ```
+
+Package:
 
 ```swift
 dependencies: [
@@ -21,6 +25,23 @@ dependencies: [
 targets: [
     .testTarget(name: "MyTarget", dependencies: ["XCLinting"]),
 ]
+```
+
+## Tool Usage
+
+Just point the `xclint` binary at your `.xcodeproj`. Check out its `-h` flag for more usage.
+
+⚠️ `.xclint.yml` support is a WIP. It does not work correctly at the moment.
+
+```
+# xclint /path/to/MyProject.xcodeproj
+```
+
+This will run a default set of rules. But, you can customize its behavior with a `.xclint.yml` file. The basic structure borrows a lot from [SwiftLint](https://github.com/realm/SwiftLint).
+
+```yaml
+embedded_build_settings: warning
+disabled_rules: ["dont", "run", "these"]
 ```
 
 ## Alternatives
