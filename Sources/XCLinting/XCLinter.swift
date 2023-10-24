@@ -57,6 +57,7 @@ extension XCLinter.Environment {
 
 extension XCLinter {
 	public static let defaultRules: [Rule] = [
-		embeddedBuildSettingsRule
+		embeddedBuildSettingsRule,
+		buildFilesAreOrderedRule
 	]
 }

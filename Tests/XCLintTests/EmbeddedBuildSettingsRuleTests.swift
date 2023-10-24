@@ -26,7 +26,7 @@ final class EmbeddedBuildSettingsRuleTests: XCTestCase {
 
 		let env = XCLinter.Environment(
 			project: project,
-			projectRootURL: URL(fileURLWithPath: "/dev/null"),
+			projectRootURL: url,
 			configuration: Configuration()
 		)
 
@@ -44,7 +44,7 @@ final class EmbeddedBuildSettingsRuleTests: XCTestCase {
 
 		let env = XCLinter.Environment(
 			project: project,
-			projectRootURL: URL(fileURLWithPath: "/dev/null"),
+			projectRootURL: url,
 			configuration: Configuration()
 		)
 
