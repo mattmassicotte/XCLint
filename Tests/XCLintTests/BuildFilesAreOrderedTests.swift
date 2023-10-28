@@ -9,7 +9,7 @@ final class BuildFilesAreOrderedTests: XCTestCase {
 		
 		let project = try XcodeProj(pathString: url.path)
 		
-		let rules: [XCLinter.Rule] = [buildFilesAreOrderedRule]
+		let rules: [XCLinter.Rule] = [{ try BuildFilesAreOrderedRule().run($0) }]
 		
 		let env = XCLinter.Environment(
 			project: project,
@@ -27,7 +27,7 @@ final class BuildFilesAreOrderedTests: XCTestCase {
 		
 		let project = try XcodeProj(pathString: url.path)
 		
-		let rules: [XCLinter.Rule] = [buildFilesAreOrderedRule]
+		let rules: [XCLinter.Rule] = [{ try BuildFilesAreOrderedRule().run($0) }]
 		
 		let env = XCLinter.Environment(
 			project: project,

@@ -1,80 +1,83 @@
 import Foundation
 
-func buildFilesAreOrderedRule(_ environment: XCLinter.Environment) throws -> [Violation] {
-	let projectText = try String(contentsOf: environment.projectRootURL.appendingPathComponent("project.pbxproj"))
-	var violations = [Violation]()
-	violations.append(contentsOf: try validateSection(forType: "PBXBuildFile", projectText: projectText))
-	violations.append(contentsOf: try validateSection(forType: "PBXFileReference", projectText: projectText))
-	return violations
-}
-
-private func validateSection(forType sectionType: String, projectText: String) throws -> [Violation] {
-	// Find the range in projectText for the sectionType
-	guard let range = getSectionRange(forType: sectionType, projectText: projectText) else {
-		throw XCLintError.badProjectFile("Missing \(sectionType) section")
+struct BuildFilesAreOrderedRule {
+	
+	func run(_ environment: XCLinter.Environment) throws -> [Violation] {
+		let projectText = try String(contentsOf: environment.projectRootURL.appendingPathComponent("project.pbxproj"))
+		var violations = [Violation]()
+		violations.append(contentsOf: try validateSection(forType: "PBXBuildFile", projectText: projectText))
+		violations.append(contentsOf: try validateSection(forType: "PBXFileReference", projectText: projectText))
+		return violations
 	}
 	
-	// split this range of projectText into lines. convert to String now to
-	// avoid repeated conversions when applying the regex
-	let lines = projectText[range].split(separator: "\n").map(String.init)
-	
-	// verify that there is more than one item in this section, otherwise no violations
-	guard var previousLine = lines.first, lines.count > 1 else { return [] }
-	var previousId = getId(from: previousLine)
-	
-	var violations = [Violation]()
-	
-	for line in lines.dropFirst() {
-		let id = getId(from: line)
-		
-		// compare the identifiers of this line with the previous line
-		if verify(previousId, isLessThan: id) == false {
-			violations.append(.init("\(sectionType) \(violationNote(from: line)) is out of order with \(violationNote(from: previousLine))."))
+	private func validateSection(forType sectionType: String, projectText: String) throws -> [Violation] {
+		// Find the range in projectText for the sectionType
+		guard let range = getSectionRange(forType: sectionType, projectText: projectText) else {
+			throw XCLintError.badProjectFile("Missing \(sectionType) section")
 		}
-		previousId = id
-		previousLine = line
+		
+		// split this range of projectText into lines. convert to String now to
+		// avoid repeated conversions when applying the regex
+		let lines = projectText[range].split(separator: "\n").map(String.init)
+		
+		// verify that there is more than one item in this section, otherwise no violations
+		guard var previousLine = lines.first, lines.count > 1 else { return [] }
+		var previousId = getId(from: previousLine)
+		
+		var violations = [Violation]()
+		
+		for line in lines.dropFirst() {
+			let id = getId(from: line)
+			
+			// compare the identifiers of this line with the previous line
+			if verify(previousId, isLessThan: id) == false {
+				violations.append(.init("\(sectionType) \(violationNote(from: line)) is out of order with \(violationNote(from: previousLine))."))
+			}
+			previousId = id
+			previousLine = line
+		}
+		
+		return violations
 	}
 	
-	return violations
-}
-
-private func getSectionRange(forType sectionType: String, projectText: String) -> Range<String.Index>? {
-	guard let start = projectText.range(of: "/* Begin \(sectionType) section */\n"),
-		  let end = projectText.range(of: "/* End \(sectionType) section */"),
-		  start.upperBound < end.lowerBound
-	else { return nil }
-	return start.upperBound..<end.lowerBound
-}
-
-private let lineRegex = try! NSRegularExpression(pattern: #"^\s*([A-Z0-9]{24})\s+\/\*\s([^\*]*)\s\*\/"#, options: [])
-
-/// This function will find the `Substring` for the id of the PBXBuildFile or PBXFileReference
-private func getId(from line: String) -> Substring {
-	guard let match = lineRegex.firstMatch(in: line, options: [], range: line.nsrange),
-		  let idRange = Range(match.range(at: 1), in: line)
-	else { fatalError() }
-	return line[idRange]
-}
-
-private func getFileInfo(from line: String) -> Substring {
-	guard let match = lineRegex.firstMatch(in: line, options: [], range: line.nsrange),
-		  let infoRange = Range(match.range(at: 2), in: line)
-	else { fatalError() }
-	return line[infoRange]
-}
-
-private func violationNote(from line: String) -> String {
-	let id = getId(from: line)
-	let info = getFileInfo(from: line)
-	return "'(\(id)) \(info)'"
-}
-
-/// This function will compare two ids, passed in as Substrings, which should be the same length.
-/// Starting from the beginning of each substring, the first UTF8 character that is not exactly
-/// the same between the two ids is compared.
-private func verify(_ id1: Substring, isLessThan id2: Substring) -> Bool {
-	guard let firstDifferingElement = zip(id1.utf8, id2.utf8).lazy.first(where: { $0.1 != $0.0 }) else { return false }
-	return firstDifferingElement.0 < firstDifferingElement.1
+	private func getSectionRange(forType sectionType: String, projectText: String) -> Range<String.Index>? {
+		guard let start = projectText.range(of: "/* Begin \(sectionType) section */\n"),
+			  let end = projectText.range(of: "/* End \(sectionType) section */"),
+			  start.upperBound < end.lowerBound
+		else { return nil }
+		return start.upperBound..<end.lowerBound
+	}
+	
+	private let lineRegex = try! NSRegularExpression(pattern: #"^\s*([A-Z0-9]{24})\s+\/\*\s([^\*]*)\s\*\/"#, options: [])
+	
+	/// This function will find the `Substring` for the id of the PBXBuildFile or PBXFileReference
+	private func getId(from line: String) -> Substring {
+		guard let match = lineRegex.firstMatch(in: line, options: [], range: line.nsrange),
+			  let idRange = Range(match.range(at: 1), in: line)
+		else { fatalError() }
+		return line[idRange]
+	}
+	
+	private func getFileInfo(from line: String) -> Substring {
+		guard let match = lineRegex.firstMatch(in: line, options: [], range: line.nsrange),
+			  let infoRange = Range(match.range(at: 2), in: line)
+		else { fatalError() }
+		return line[infoRange]
+	}
+	
+	private func violationNote(from line: String) -> String {
+		let id = getId(from: line)
+		let info = getFileInfo(from: line)
+		return "'(\(id)) \(info)'"
+	}
+	
+	/// This function will compare two ids, passed in as Substrings, which should be the same length.
+	/// Starting from the beginning of each substring, the first UTF8 character that is not exactly
+	/// the same between the two ids is compared.
+	private func verify(_ id1: Substring, isLessThan id2: Substring) -> Bool {
+		guard let firstDifferingElement = zip(id1.utf8, id2.utf8).lazy.first(where: { $0.1 != $0.0 }) else { return false }
+		return firstDifferingElement.0 < firstDifferingElement.1
+	}
 }
 
 private extension String {
