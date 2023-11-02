@@ -1,6 +1,6 @@
 import XCTest
 
-import XCLinting
+@testable import XCLinting
 import XcodeProj
 
 extension Bundle {
@@ -22,15 +22,13 @@ final class EmbeddedBuildSettingsRuleTests: XCTestCase {
 
 		let project = try XcodeProj(pathString: url.path)
 
-		let rules = XCLinter.defaultRules
-
 		let env = XCLinter.Environment(
 			project: project,
 			projectRootURL: url,
 			configuration: Configuration()
 		)
 
-		let violations = try rules.flatMap { try $0(env) }
+		let violations = embeddedBuildSettingsRule(env)
 
 		XCTAssertFalse(violations.isEmpty)
 	}
@@ -40,15 +38,13 @@ final class EmbeddedBuildSettingsRuleTests: XCTestCase {
 
 		let project = try XcodeProj(pathString: url.path)
 
-		let rules = XCLinter.defaultRules
-
 		let env = XCLinter.Environment(
 			project: project,
 			projectRootURL: url,
 			configuration: Configuration()
 		)
 
-		let violations = try rules.flatMap { try $0(env) }
+		let violations = embeddedBuildSettingsRule(env)
 
 		XCTAssertTrue(violations.isEmpty)
 	}
