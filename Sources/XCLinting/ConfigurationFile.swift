@@ -2,14 +2,17 @@ import Foundation
 
 public struct Configuration: Hashable {
 	public var disabledRules: Set<String>
+	public var optInRules: Set<String>
 	public var rules: [String: RuleConfiguration]
 
 	public init(
 		rules: [String: RuleConfiguration] = [:],
-		disabledRules: Set<String> = Set()
+		disabledRules: Set<String> = Set(),
+		optInRules: Set<String> = Set()
 	) {
 		self.rules = rules
 		self.disabledRules = disabledRules
+		self.optInRules = optInRules
 	}
 }
 
@@ -44,9 +47,11 @@ extension Configuration: Decodable {
 		/// Contains all the top-level well-defined keys used in a configuration file
 		enum PredefinedKeys: String {
 			case disabledRules = "disabled_rules"
+			case optInRules = "opt_in_rules"
 		}
 
 		case disabledRules
+		case optInRules
 		case ruleIdentifier(String)
 
 		init?(intValue: Int) {
@@ -57,6 +62,8 @@ extension Configuration: Decodable {
 			switch stringValue {
 			case PredefinedKeys.disabledRules.rawValue:
 				self = .disabledRules
+			case PredefinedKeys.optInRules.rawValue:
+				self = .optInRules
 			default:
 				self = .ruleIdentifier(stringValue)
 			}
@@ -66,6 +73,8 @@ extension Configuration: Decodable {
 			switch self {
 			case .disabledRules:
 				PredefinedKeys.disabledRules.rawValue
+			case .optInRules:
+				PredefinedKeys.optInRules.rawValue
 			case let .ruleIdentifier(value):
 				value
 			}
@@ -80,6 +89,7 @@ extension Configuration: Decodable {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 
 		self.disabledRules = Set()
+		self.optInRules = Set()
 
 		var decodedRules = [String: RuleConfiguration]()
 
@@ -87,6 +97,8 @@ extension Configuration: Decodable {
 			switch key {
 			case .disabledRules:
 				self.disabledRules = try container.decode(Set<String>.self, forKey: key)
+			case .optInRules:
+				self.optInRules = try container.decode(Set<String>.self, forKey: key)
 			case let .ruleIdentifier(name):
 				let ruleConfig = try container.decode(RuleConfiguration.self, forKey: key)
 
@@ -105,6 +117,12 @@ extension Configuration: Decodable {
 				throw XCLintError.unrecognizedRuleName(id)
 			}
 		}
+
+		for id in optInRules {
+			if allIdentifiers.contains(id) == false {
+				throw XCLintError.unrecognizedRuleName(id)
+			}
+		}
 	}
 }
 
@@ -112,6 +130,8 @@ extension Configuration {
 	public var enabledRules: Set<String> {
 		let defaultIdentifiers = XCLinter.defaultRuleIdentifiers
 
-		return defaultIdentifiers.subtracting(disabledRules)
+		return defaultIdentifiers
+			.union(optInRules)
+			.subtracting(disabledRules)
 	}
 }

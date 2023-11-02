@@ -31,8 +31,6 @@ targets: [
 
 Just point the `xclint` binary at your `.xcodeproj`. Check out its `-h` flag for more usage.
 
-⚠️ `.xclint.yml` support is a WIP. It does not work correctly at the moment.
-
 ```
 # xclint /path/to/MyProject.xcodeproj
 ```
@@ -40,8 +38,14 @@ Just point the `xclint` binary at your `.xcodeproj`. Check out its `-h` flag for
 This will run a default set of rules. But, you can customize its behavior with a `.xclint.yml` file. The basic structure borrows a lot from [SwiftLint](https://github.com/realm/SwiftLint).
 
 ```yaml
-embedded_build_settings: warning
-disabled_rules: ["dont", "run", "these"]
+# Some rules may not be appropriate for all projects. You must opt-in those.
+opt_in_rules:
+  - embedded_build_setting # checks for build settings in the project file
+  - groups_sorted          # checks that all group contents are alphabetically sorted
+
+# Other rules make sense for all projects by default. You must opt-out of those.
+disabled_rules:
+  - build_files_ordered. # checks that the ordering of techincally-unordered collections Xcode writes out is preserved
 ```
 
 ## Alternatives

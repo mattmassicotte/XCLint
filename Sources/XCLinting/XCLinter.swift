@@ -66,7 +66,6 @@ extension XCLinter.Environment {
 
 extension XCLinter {
 	public static let defaultRuleIdentifiers: Set<String> = [
-		"embedded_build_setting",
 		"build_files_ordered"
 	]
 

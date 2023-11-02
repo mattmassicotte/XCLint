@@ -25,6 +25,20 @@ final class ConfigurationTests: XCTestCase {
 		XCTAssertEqual(config, expected)
 	}
 
+	func testReadOptInRules() throws {
+		let string = """
+{
+	"opt_in_rules": ["a", "b", "c"]
+}
+"""
+
+		let config = try JSONDecoder().decode(Configuration.self, from: Data(string.utf8))
+
+		let expected = Configuration(optInRules: Set(["a", "b", "c"]))
+
+		XCTAssertEqual(config, expected)
+	}
+
 	func testReadRules() throws {
 		let string = """
 {
