@@ -18,7 +18,7 @@ struct XCLintCommand: ParsableCommand {
 
 	@Option(
 		name: .customLong("config"),
-		help: "The path to an xclint configuraton file (defaults to looking in the directory of the target .xcodeproj)."
+		help: "The path to an xclint configuration file (defaults to looking in the directory of the target .xcodeproj)."
 	)
 	var configFilePath: String?
 
