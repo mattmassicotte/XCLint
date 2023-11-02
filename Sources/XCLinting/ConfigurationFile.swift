@@ -96,4 +96,22 @@ extension Configuration: Decodable {
 
 		self.rules = decodedRules
 	}
+
+	public func validate() throws {
+		let allIdentifiers = XCLinter.ruleIdentifiers
+
+		for id in disabledRules {
+			if allIdentifiers.contains(id) == false {
+				throw XCLintError.unrecognizedRuleName(id)
+			}
+		}
+	}
+}
+
+extension Configuration {
+	public var enabledRules: Set<String> {
+		let defaultIdentifiers = XCLinter.defaultRuleIdentifiers
+
+		return defaultIdentifiers.subtracting(disabledRules)
+	}
 }

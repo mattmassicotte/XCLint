@@ -34,9 +34,12 @@ struct XCLintCommand: ParsableCommand {
 
 		// find the effective environment
 		let config = try resolvedConfiguration(projectRootURL: URL(fileURLWithPath: projPath))
+
+		try config.validate()
+
 		let env = try XCLinter.Environment(projectPath: projPath, configuration: config)
 
-		let linter = XCLinter(environment: env)
+		let linter = try XCLinter(environment: env)
 
 		let violations = try linter.run()
 		
