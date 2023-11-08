@@ -66,7 +66,8 @@ extension XCLinter.Environment {
 
 extension XCLinter {
 	public static let defaultRuleIdentifiers: Set<String> = [
-		"build_files_ordered"
+		"build_files_ordered",
+		"validate_build_settings",
 	]
 
 	public static let defaultRules: [Rule] = Array(ruleMap.filter({ defaultRuleIdentifiers.contains($0.0) }).values)
@@ -76,5 +77,6 @@ extension XCLinter {
 		"embedded_build_setting": embeddedBuildSettingsRule,
 		"build_files_ordered": { try BuildFilesAreOrderedRule().run($0) },
 		"groups_sorted": groupsAreSortedRule,
+		"validate_build_settings": { try ValidateBuildSettingsRule().run($0) },
 	]
 }

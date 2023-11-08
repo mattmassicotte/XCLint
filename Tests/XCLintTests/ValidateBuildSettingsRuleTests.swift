@@ -3,8 +3,8 @@ import XCTest
 @testable import XCLinting
 import XcodeProj
 
-final class EmbeddedBuildSettingsRuleTests: XCTestCase {
-	func testProjectWithBuildSettings() throws {
+final class ValidateBuildSettingsRuleTests: XCTestCase {
+	func testProjectWithNoInvalidBuildSettings() throws {
 		let url = try Bundle.module.testDataURL(named: "StockMacOSApp.xcodeproj")
 
 		let project = try XcodeProj(pathString: url.path)
@@ -15,13 +15,13 @@ final class EmbeddedBuildSettingsRuleTests: XCTestCase {
 			configuration: Configuration()
 		)
 
-		let violations = embeddedBuildSettingsRule(env)
+		let violations = try ValidateBuildSettingsRule().run(env)
 
-		XCTAssertFalse(violations.isEmpty)
+		XCTAssertEqual(violations, [])
 	}
 
-	func testProjectWithBuildSettingsRemoved() throws {
-		let url = try Bundle.module.testDataURL(named: "BuildSettingsRemoved.xcodeproj")
+	func testProjectWithInvalidBuildSettings() throws {
+		let url = try Bundle.module.testDataURL(named: "InvalidEmbeddedBuildSettings.xcodeproj")
 
 		let project = try XcodeProj(pathString: url.path)
 
@@ -31,9 +31,8 @@ final class EmbeddedBuildSettingsRuleTests: XCTestCase {
 			configuration: Configuration()
 		)
 
-		let violations = embeddedBuildSettingsRule(env)
+		let violations = try ValidateBuildSettingsRule().run(env)
 
-		XCTAssertTrue(violations.isEmpty)
+		XCTAssertFalse(violations.isEmpty)
 	}
 }
-
