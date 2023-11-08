@@ -3,7 +3,7 @@
 # XCLint
 Xcode project linting
 
-This project is currently very WIP.
+This project is still pretty young, and has rough edges. However, it kinda works! So, please do give it a shot.
 
 ## Installation
 
