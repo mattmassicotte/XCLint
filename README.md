@@ -45,7 +45,8 @@ opt_in_rules:
 
 # Other rules make sense for all projects by default. You must opt-out of those.
 disabled_rules:
-  - build_files_ordered # checks that the ordering of techincally-unordered collections Xcode writes out is preserved
+  - build_files_ordered     # checks that the ordering of techincally-unordered collections Xcode writes out is preserved
+  - validate_build_settings # checks that build settings have valid values
 ```
 
 ## Alternatives
