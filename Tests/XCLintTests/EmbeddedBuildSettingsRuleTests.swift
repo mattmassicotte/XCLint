@@ -15,7 +15,23 @@ final class EmbeddedBuildSettingsRuleTests: XCTestCase {
 			configuration: Configuration()
 		)
 
-		let violations = embeddedBuildSettingsRule(env)
+		let violations = try EmbeddedBuildSettingsRule().run(env)
+
+		XCTAssertFalse(violations.isEmpty)
+	}
+
+	func testProjectWithProjectLevelBuildSettingsOnly() throws {
+		let url = try Bundle.module.testDataURL(named: "ProjectOnlyBuildSettings.xcodeproj")
+
+		let project = try XcodeProj(pathString: url.path)
+
+		let env = XCLinter.Environment(
+			project: project,
+			projectRootURL: url,
+			configuration: Configuration()
+		)
+
+		let violations = try EmbeddedBuildSettingsRule().run(env)
 
 		XCTAssertFalse(violations.isEmpty)
 	}
@@ -31,7 +47,7 @@ final class EmbeddedBuildSettingsRuleTests: XCTestCase {
 			configuration: Configuration()
 		)
 
-		let violations = embeddedBuildSettingsRule(env)
+		let violations = try EmbeddedBuildSettingsRule().run(env)
 
 		XCTAssertTrue(violations.isEmpty)
 	}

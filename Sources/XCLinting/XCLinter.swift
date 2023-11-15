@@ -74,7 +74,7 @@ extension XCLinter {
 	public static let ruleIdentifiers: Set<String> = Set(ruleMap.keys)
 
 	public static let ruleMap: [String: Rule] = [
-		"embedded_build_setting": embeddedBuildSettingsRule,
+		"embedded_build_setting": { try EmbeddedBuildSettingsRule().run($0) },
 		"build_files_ordered": { try BuildFilesAreOrderedRule().run($0) },
 		"groups_sorted": groupsAreSortedRule,
 		"validate_build_settings": { try ValidateBuildSettingsRule().run($0) },
