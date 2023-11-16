@@ -29,10 +29,11 @@ targets: [
 
 ## Tool Usage
 
-Just point the `xclint` binary at your `.xcodeproj`. Check out its `-h` flag for more usage.
+Just run the `xclint` binary in your project directory. Check out its `-h` flag for more usage.
 
 ```
-# xclint /path/to/MyProject.xcodeproj
+# cd my/project
+# xclint
 ```
 
 This will run a default set of rules. But, you can customize its behavior with a `.xclint.yml` file. The basic structure borrows a lot from [SwiftLint](https://github.com/realm/SwiftLint).
