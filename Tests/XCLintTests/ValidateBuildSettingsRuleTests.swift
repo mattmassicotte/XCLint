@@ -35,4 +35,20 @@ final class ValidateBuildSettingsRuleTests: XCTestCase {
 
 		XCTAssertFalse(violations.isEmpty)
 	}
+
+	func testInvalidSettingsInXCConfigFile() throws {
+		let url = try Bundle.module.testDataURL(named: "XCConfigFiles.xcodeproj")
+
+		let project = try XcodeProj(pathString: url.path)
+
+		let env = XCLinter.Environment(
+			project: project,
+			projectRootURL: url,
+			configuration: Configuration()
+		)
+
+		let violations = try ValidateBuildSettingsRule().run(env)
+
+		XCTAssertFalse(violations.isEmpty)
+	}
 }
