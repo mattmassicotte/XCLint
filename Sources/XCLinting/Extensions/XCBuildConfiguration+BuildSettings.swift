@@ -9,7 +9,7 @@ extension XCBuildConfiguration {
 			return nil
 		}
 
-		return try String(contentsOf: URL(filePath: fullPath))
+		return try String(contentsOf: URL(fileURLWithPath: fullPath))
 	}
 
 	func baseConfigurationStatements(with sourceRoot: String) throws -> [Statement] {

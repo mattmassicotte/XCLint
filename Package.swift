@@ -30,7 +30,6 @@ let package = Package(
 				.copy("TestData"),
 			]
 		),
-
 	]
 )
 
