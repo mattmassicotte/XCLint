@@ -30,7 +30,7 @@ extension PBXProj {
 		rootURL: URL,
 		_ block: (PBXProject, PBXTarget, XCBuildConfiguration, [[Statement]]) throws -> Void
 	) throws {
-		let sourceRootPath = rootURL.path(percentEncoded: false)
+		let sourceRootPath = rootURL.path
 
 		for proj in projects {
 			let projConfigList = proj.buildConfigurationList
