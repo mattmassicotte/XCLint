@@ -11,8 +11,6 @@ struct ValidateBuildSettingsRule {
 		var violations = [Violation]()
 
 		try enumerateSettings(with: environment) { target, config, settings in
-			print("\(target.name), \(config.name), \(settings)")
-			
 			violations.append(contentsOf: evaluateTargetSettings(target.name, settings: settings))
 		}
 

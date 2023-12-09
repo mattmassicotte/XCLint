@@ -37,8 +37,6 @@ extension PBXProj {
 
 			for target in proj.targets {
 				for config in target.buildConfigurationList?.buildConfigurations ?? [] {
-					print("\(target.name)-\(config.name)")
-
 					let projConfig = projConfigList?.configuration(name: config.name)
 					let projConfigStatements = try projConfig?.baseConfigurationStatements(with: sourceRootPath) ?? []
 					let projStatements = projConfig?.buildSettingsStatements ?? []
