@@ -43,13 +43,16 @@ struct ValidateBuildSettingsRule {
 	) throws {
 		let project = environment.project
 		let sourceRootURL = environment.projectRootURL.deletingLastPathComponent()
-		let evaluator = Evaluator(rootURL: sourceRootURL)
+		let evaluator = Evaluator()
 		let platformStatements: [Statement] = []
 
-		try project.pbxproj.enumerateBuildSettingStatements(rootURL: sourceRootURL) { proj, target, config, statementsList in
+		try project.pbxproj.enumerateBuildSettingStatements(rootURL: sourceRootURL) { proj, target, config, statementsList, url in
 			let heirarchy = [platformStatements] + statementsList
 
-			let settings = try evaluator.evaluate(heirarchy: heirarchy)
+			// This is bogus. But the only solution I can come up with is to change how evaluation works, and that's complex.
+			let effectiveURL = url ?? sourceRootURL
+
+			let settings = try evaluator.evaluate(heirarchy: heirarchy, for: effectiveURL)
 
 			try block(target, config, settings)
 		}

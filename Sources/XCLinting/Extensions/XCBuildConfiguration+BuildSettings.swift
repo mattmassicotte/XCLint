@@ -4,20 +4,12 @@ import XCConfig
 import XcodeProj
 
 extension XCBuildConfiguration {
-	func baseConfigurationContent(with sourceRoot: String) throws -> String? {
+	func baseConfigurationURL(with sourceRoot: String) throws -> URL? {
 		guard let fullPath = try baseConfiguration?.fullPath(sourceRoot: sourceRoot) else {
 			return nil
 		}
 
-		return try String(contentsOf: URL(fileURLWithPath: fullPath))
-	}
-
-	func baseConfigurationStatements(with sourceRoot: String) throws -> [Statement] {
-		guard let content = try baseConfigurationContent(with: sourceRoot) else {
-			return []
-		}
-
-		return Parser().parse(content)
+		return URL(fileURLWithPath: fullPath, isDirectory: false)
 	}
 
 	var buildSettingsStatements: [Statement] {

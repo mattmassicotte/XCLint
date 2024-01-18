@@ -3,6 +3,14 @@ import Foundation
 import XCConfig
 import XcodeProj
 
+extension Parser {
+	func parse(contentsOf url: URL) throws -> [Statement] {
+		let string = try String(contentsOf: url)
+
+		return parse(string)
+	}
+}
+
 extension PBXProj {
 	func enumerateBuildConfigurations(_ block: (String, XCConfigurationList) throws -> Void) rethrows {
 		for target in legacyTargets {
@@ -28,7 +36,7 @@ extension PBXProj {
 
 	func enumerateBuildSettingStatements(
 		rootURL: URL,
-		_ block: (PBXProject, PBXTarget, XCBuildConfiguration, [[Statement]]) throws -> Void
+		_ block: (PBXProject, PBXTarget, XCBuildConfiguration, [[Statement]], URL?) throws -> Void
 	) throws {
 		let sourceRootPath = rootURL.path
 
@@ -38,20 +46,22 @@ extension PBXProj {
 			for target in proj.targets {
 				for config in target.buildConfigurationList?.buildConfigurations ?? [] {
 					let projConfig = projConfigList?.configuration(name: config.name)
-					let projConfigStatements = try projConfig?.baseConfigurationStatements(with: sourceRootPath) ?? []
+					let baseConfigURL = try projConfig?.baseConfigurationURL(with: sourceRootPath)
+					let projConfigStatements = try baseConfigURL.map { try Parser().parse(contentsOf: $0) }
 					let projStatements = projConfig?.buildSettingsStatements ?? []
 
-					let configStatements = try config.baseConfigurationStatements(with: sourceRootPath)
+					let configURL = try config.baseConfigurationURL(with: sourceRootPath)
+					let configStatements = try configURL.map {try Parser().parse(contentsOf: $0) }
 					let statements = config.buildSettingsStatements
 
 					let heirarchy = [
-						projConfigStatements,
+						projConfigStatements ?? [],
 						projStatements,
-						configStatements,
+						configStatements ?? [],
 						statements
 					]
 
-					try block(proj, target, config, heirarchy)
+					try block(proj, target, config, heirarchy, configURL)
 				}
 			}
 		}

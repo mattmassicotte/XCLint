@@ -12,7 +12,7 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/tuist/XcodeProj", from: "8.15.0"),
-		.package(url: "https://github.com/mattmassicotte/XCConfig", revision: "586308908873a212c17019163afea02847f782a3"),
+		.package(url: "https://github.com/mattmassicotte/XCConfig", revision: "38fe6d21eaf34c36c3835cb4c5b81b4654de1abc"),
 		.package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.3"),
 		.package(url: "https://github.com/jpsim/Yams.git", from: "5.0.0"),
 	],
