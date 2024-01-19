@@ -12,11 +12,11 @@ extension XCBuildConfiguration {
 		return URL(fileURLWithPath: fullPath, isDirectory: false)
 	}
 
-	var buildSettingsStatements: [Statement] {
-		buildSettings.compactMap { (key, value) -> Statement? in
+	var buildSettingsAssignments: [Assignment] {
+		buildSettings.compactMap { (key, value) -> Assignment? in
 			guard let value = value as? String else { return nil }
 
-			return Statement.assignment(Assignment(key: key, value: value))
+			return Assignment(key: key, value: value)
 		}
 	}
 }

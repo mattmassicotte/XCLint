@@ -36,7 +36,7 @@ extension PBXProj {
 
 	func enumerateBuildSettingStatements(
 		rootURL: URL,
-		_ block: (PBXProject, PBXTarget, XCBuildConfiguration, [[Statement]], URL?) throws -> Void
+		_ block: (PBXProject, PBXTarget, XCBuildConfiguration, [BuildSetting: String]) throws -> Void
 	) throws {
 		let sourceRootPath = rootURL.path
 
@@ -46,22 +46,28 @@ extension PBXProj {
 			for target in proj.targets {
 				for config in target.buildConfigurationList?.buildConfigurations ?? [] {
 					let projConfig = projConfigList?.configuration(name: config.name)
-					let baseConfigURL = try projConfig?.baseConfigurationURL(with: sourceRootPath)
-					let projConfigStatements = try baseConfigURL.map { try Parser().parse(contentsOf: $0) }
-					let projStatements = projConfig?.buildSettingsStatements ?? []
-
+					let projConfigURL = try projConfig?.baseConfigurationURL(with: sourceRootPath)
 					let configURL = try config.baseConfigurationURL(with: sourceRootPath)
-					let configStatements = try configURL.map {try Parser().parse(contentsOf: $0) }
-					let statements = config.buildSettingsStatements
 
-					let heirarchy = [
-						projConfigStatements ?? [],
-						projStatements,
-						configStatements ?? [],
-						statements
-					]
+					let heirarchy = BuildSettingsHeirarchy(
+						projectRootURL: rootURL,
+						platformDefaults: [],
+						projectConfigURL: projConfigURL,
+						project: projConfig?.buildSettingsAssignments ?? [],
+						configURL: configURL,
+						target: config.buildSettingsAssignments
+					)
 
-					try block(proj, target, config, heirarchy, configURL)
+					let settings: [BuildSetting: String]
+
+					do {
+						settings = try Evaluator().evaluate(heirarchy)
+					} catch {
+						print("XCConfig failed to evaluate settings heirarchy:", error)
+						settings = [:]
+					}
+
+					try block(proj, target, config, settings)
 				}
 			}
 		}

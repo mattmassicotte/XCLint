@@ -41,7 +41,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mattmassicotte/XCConfig",
       "state" : {
-        "revision" : "38fe6d21eaf34c36c3835cb4c5b81b4654de1abc"
+        "revision" : "6375b3d7ac16e5c4103c3cbe7b633411bee47d37"
       }
     },
     {
