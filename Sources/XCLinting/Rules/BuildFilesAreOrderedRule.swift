@@ -22,16 +22,25 @@ struct BuildFilesAreOrderedRule {
 		
 		// verify that there is more than one item in this section, otherwise no violations
 		guard var previousLine = lines.first, lines.count > 1 else { return [] }
-		var previousId = getId(from: previousLine)
-		
+		guard var previousId = getId(from: previousLine) else { return [] }
+
 		var violations = [Violation]()
 		
 		for line in lines.dropFirst() {
-			let id = getId(from: line)
-			
+			guard let id = getId(from: line) else {
+				continue
+			}
+
 			// compare the identifiers of this line with the previous line
 			if verify(previousId, isLessThan: id) == false {
-				violations.append(.init("\(sectionType) \(violationNote(from: line)) is out of order with \(violationNote(from: previousLine))."))
+				guard
+					let lineNote = violationNote(from: line),
+					let previousLineNote = violationNote(from: previousLine)
+				else {
+					continue
+				}
+
+				violations.append(.init("\(sectionType) \(lineNote) is out of order with \(previousLineNote)."))
 			}
 			previousId = id
 			previousLine = line
@@ -51,23 +60,39 @@ struct BuildFilesAreOrderedRule {
 	private let lineRegex = try! NSRegularExpression(pattern: #"^\s*([A-Z0-9]{24})\s+\/\*\s([^\*]*)\s\*\/"#, options: [])
 	
 	/// This function will find the `Substring` for the id of the PBXBuildFile or PBXFileReference
-	private func getId(from line: String) -> Substring {
-		guard let match = lineRegex.firstMatch(in: line, options: [], range: line.nsrange),
-			  let idRange = Range(match.range(at: 1), in: line)
-		else { fatalError() }
+	private func getId(from line: String) -> Substring? {
+		guard
+			let match = lineRegex.firstMatch(in: line, options: [], range: line.nsrange),
+			let idRange = Range(match.range(at: 1), in: line)
+		else {
+			print("BuildFilesAreOrderedRule failed to match on: ", line)
+
+			return nil
+		}
 		return line[idRange]
 	}
 	
-	private func getFileInfo(from line: String) -> Substring {
-		guard let match = lineRegex.firstMatch(in: line, options: [], range: line.nsrange),
-			  let infoRange = Range(match.range(at: 2), in: line)
-		else { fatalError() }
+	private func getFileInfo(from line: String) -> Substring? {
+		guard
+			let match = lineRegex.firstMatch(in: line, options: [], range: line.nsrange),
+			let infoRange = Range(match.range(at: 2), in: line)
+		else {
+			print("BuildFilesAreOrderedRule failed to match on: ", line)
+
+			return nil
+		}
+
 		return line[infoRange]
 	}
 	
-	private func violationNote(from line: String) -> String {
-		let id = getId(from: line)
-		let info = getFileInfo(from: line)
+	private func violationNote(from line: String) -> String? {
+		guard
+			let id = getId(from: line),
+			let info = getFileInfo(from: line)
+		else {
+			return nil
+		}
+
 		return "'(\(id)) \(info)'"
 	}
 	
