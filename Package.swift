@@ -15,6 +15,7 @@ let package = Package(
 		.package(url: "https://github.com/mattmassicotte/XCConfig", revision: "6375b3d7ac16e5c4103c3cbe7b633411bee47d37"),
 		.package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.3"),
 		.package(url: "https://github.com/jpsim/Yams.git", from: "5.0.0"),
+		.package(url: "https://github.com/kylef/PathKit.git", from: "1.0.1"),
 	],
 	targets: [
 		.executableTarget(name: "clitool", dependencies: [
@@ -22,7 +23,7 @@ let package = Package(
 			.product(name: "ArgumentParser", package: "swift-argument-parser"),
 			"Yams"
 		]),
-		.target(name: "XCLinting", dependencies: ["XCConfig", "XcodeProj"]),
+		.target(name: "XCLinting", dependencies: ["PathKit", "XCConfig", "XcodeProj"]),
 		.testTarget(
 			name: "XCLintTests",
 			dependencies: ["XCLinting", "XcodeProj"],

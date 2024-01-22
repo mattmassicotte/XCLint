@@ -78,5 +78,6 @@ extension XCLinter {
 		"build_files_ordered": { try BuildFilesAreOrderedRule().run($0) },
 		"groups_sorted": groupsAreSortedRule,
 		"validate_build_settings": { try ValidateBuildSettingsRule().run($0) },
+		"implicit_dependencies": { try ImplicitDependenciesRule().run($0) },
 	]
 }

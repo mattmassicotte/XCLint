@@ -43,6 +43,7 @@ This will run a default set of rules. But, you can customize its behavior with a
 opt_in_rules:
   - embedded_build_setting # checks for build settings in the project file
   - groups_sorted          # checks that all group contents are alphabetically sorted
+  - implicit_dependencies  # checks for any schemes that have "Find Implicit Dependencies" enabled
 
 # Other rules make sense for all projects by default. You must opt-out of those.
 disabled_rules:
