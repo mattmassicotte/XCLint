@@ -79,5 +79,7 @@ extension XCLinter {
 		"groups_sorted": groupsAreSortedRule,
 		"validate_build_settings": { try ValidateBuildSettingsRule().run($0) },
 		"implicit_dependencies": { try ImplicitDependenciesRule().run($0) },
+		"targets_use_xcconfig": { try TargetsUseXCConfigRule().run($0) },
+		"projects_use_xcconfig": { try ProjectsUseXCConfigRule().run($0) },
 	]
 }
