@@ -4,8 +4,6 @@ import XcodeProj
 import XCConfig
 
 /// Detect build settings that are deprecated or no longer functional.
-///
-/// This currently runs a superficial check. It does not perform configuration evaluation yet.
 struct ValidateBuildSettingsRule {
 	func run(_ environment: XCLinter.Environment) throws -> [Violation] {
 		var violations = [Violation]()
