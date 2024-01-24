@@ -68,6 +68,7 @@ extension XCLinter {
 	public static let defaultRuleIdentifiers: Set<String> = [
 		"build_files_ordered",
 		"validate_build_settings",
+		"relative_paths",
 	]
 
 	public static let defaultRules: [Rule] = Array(ruleMap.filter({ defaultRuleIdentifiers.contains($0.0) }).values)
@@ -81,6 +82,7 @@ extension XCLinter {
 		"implicit_dependencies": { try ImplicitDependenciesRule().run($0) },
 		"targets_use_xcconfig": { try TargetsUseXCConfigRule().run($0) },
 		"projects_use_xcconfig": { try ProjectsUseXCConfigRule().run($0) },
-		"shared_scheme_skips_tests": { try SharedSchemeSkipsTestsRule().run($0) }
+		"shared_scheme_skips_tests": { try SharedSchemeSkipsTestsRule().run($0) },
+		"relative_paths": { try RelativePathsRule().run($0) },
 	]
 }

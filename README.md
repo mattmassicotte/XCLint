@@ -58,6 +58,7 @@ opt_in_rules:
 disabled_rules:
   - build_files_ordered       # checks that the ordering of techincally-unordered collections Xcode writes out is preserved
   - validate_build_settings   # checks that build settings have valid values
+  - relative_paths            # checks for any absolute file references
 ```
 
 ## Alternatives
