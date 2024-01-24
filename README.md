@@ -47,16 +47,17 @@ This will run a default set of rules. But, you can customize its behavior with a
 ```yaml
 # Some rules may not be appropriate for all projects. You must opt-in those.
 opt_in_rules:
-  - embedded_build_setting # checks for build settings in the project file
-  - groups_sorted          # checks that all group contents are alphabetically sorted
-  - implicit_dependencies  # checks for any schemes that have "Find Implicit Dependencies" enabled
-  - targets_use_xcconfig   # checks for any targets without a XCConfig file set
-  - projects_use_xcconfig  # checks for any projects without a XCConfig file set
+  - embedded_build_setting    # checks for build settings in the project file
+  - groups_sorted             # checks that all group contents are alphabetically sorted
+  - implicit_dependencies     # checks for any schemes that have "Find Implicit Dependencies" enabled
+  - targets_use_xcconfig      # checks for any targets without a XCConfig file set
+  - projects_use_xcconfig     # checks for any projects without a XCConfig file set
+  - shared_scheme_skips_tests # checks for any shared schemes that have disabled tests
 
 # Other rules make sense for all projects by default. You must opt-out of those.
 disabled_rules:
-  - build_files_ordered     # checks that the ordering of techincally-unordered collections Xcode writes out is preserved
-  - validate_build_settings # checks that build settings have valid values
+  - build_files_ordered       # checks that the ordering of techincally-unordered collections Xcode writes out is preserved
+  - validate_build_settings   # checks that build settings have valid values
 ```
 
 ## Alternatives
