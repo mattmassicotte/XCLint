@@ -5,7 +5,7 @@ import XCLinting
 import Yams
 
 struct XCLintCommand: ParsableCommand {
-	static var configuration = CommandConfiguration(commandName: "xclint")
+	static let configuration = CommandConfiguration(commandName: "xclint")
 
 	@Flag(
 		name: .shortAndLong,
