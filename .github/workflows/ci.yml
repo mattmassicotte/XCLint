@@ -21,7 +21,7 @@ jobs:
       DEVELOPER_DIR: /Applications/Xcode_15.1.app/Contents/Developer
     steps:
       - uses: actions/checkout@v4
-      - name: Test platform ${{ matrix.destination }}
+      - name: Test
         run: set -o pipefail && xcodebuild -scheme XCLint-Package -destination "platform=macOS" test | xcbeautify
 
   test:
@@ -31,7 +31,7 @@ jobs:
       DEVELOPER_DIR: /Applications/Xcode_15.2.app/Contents/Developer
     steps:
       - uses: actions/checkout@v4
-      - name: Test platform ${{ matrix.destination }}
+      - name: Test
         run: set -o pipefail && xcodebuild -scheme XCLint-Package -destination "platform=macOS" test | xcbeautify
 
   linux_test:
