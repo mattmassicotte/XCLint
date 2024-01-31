@@ -14,7 +14,7 @@ on:
       - main
 
 jobs:
-  test:
+  macos13_test:
     name: Test
     runs-on: macOS-13
     env:
@@ -24,7 +24,7 @@ jobs:
       - name: Test
         run: set -o pipefail && xcodebuild -scheme XCLint-Package -destination "platform=macOS" test | xcbeautify
 
-  test:
+  macos14_test:
     name: Test macOS 14
     runs-on: macOS-14
     env:
