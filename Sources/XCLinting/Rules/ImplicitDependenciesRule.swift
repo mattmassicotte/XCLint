@@ -3,9 +3,6 @@ import Foundation
 import XcodeProj
 import XCConfig
 
-// this is needed for XCScheme creation
-import PathKit
-
 /// Detect when scheme implicit dependencies are enabled for any schemes.
 struct ImplicitDependenciesRule {
 	func run(_ environment: XCLinter.Environment) throws -> [Violation] {
@@ -41,7 +38,7 @@ struct ImplicitDependenciesRule {
 				.standardizedFileURL
 				.path
 
-			let scheme = try XCScheme(path: Path(entryPath))
+			let scheme = try XCScheme(pathString: entryPath)
 
 			if scheme.buildAction?.buildImplicitDependencies == true {
 				violations.append(.init("Scheme \"\(entry)\" has implicit dependencies enabled"))

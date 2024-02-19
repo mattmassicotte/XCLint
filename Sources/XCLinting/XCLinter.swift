@@ -1,6 +1,5 @@
 import Foundation
 import XcodeProj
-import PathKit
 
 public struct XCLinter {
 	public struct Environment {
