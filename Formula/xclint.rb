@@ -3,7 +3,7 @@ class Xclint < Formula
   homepage "https://github.com/mattmassicotte/XCLint"
   url "https://github.com/mattmassicotte/XCLint.git", branch: "main"
   head "https://github.com/mattmassicotte/XCLint", branch: "main"
-  version "0.1.2"
+  version "0.1.3"
 
   depends_on :xcode => ["15.0", :build]
 
