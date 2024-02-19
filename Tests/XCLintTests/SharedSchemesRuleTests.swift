@@ -21,7 +21,7 @@ final class SharedSchemesRuleTests: XCTestCase {
 	}
 
 	func testProjectWithMissingSharedSchemes() throws {
-		let url = try Bundle.module.testDataURL(named: "SchemeSkipsTests.xcodeproj")
+		let url = try Bundle.module.testDataURL(named: "BuildFilesOutOfOrder.xcodeproj")
 
 		let project = try XcodeProj(pathString: url.path)
 
