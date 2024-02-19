@@ -53,6 +53,7 @@ opt_in_rules:
   - targets_use_xcconfig      # checks for any targets without a XCConfig file set
   - projects_use_xcconfig     # checks for any projects without a XCConfig file set
   - shared_scheme_skips_tests # checks for any shared schemes that have disabled tests
+  - shared_schemes            # checks that all targets have a shared scheme present
 
 # Other rules make sense for all projects by default. You must opt-out of those.
 disabled_rules:

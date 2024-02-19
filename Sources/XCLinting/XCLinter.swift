@@ -84,5 +84,6 @@ extension XCLinter {
 		"projects_use_xcconfig": { try ProjectsUseXCConfigRule().run($0) },
 		"shared_scheme_skips_tests": { try SharedSchemeSkipsTestsRule().run($0) },
 		"relative_paths": { try RelativePathsRule().run($0) },
+		"shared_schemes": { try SharedSchemesRule().run($0) },
 	]
 }
