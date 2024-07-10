@@ -76,7 +76,7 @@ extension XCLinter {
 	public static let ruleMap: [String: Rule] = [
 		"embedded_build_setting": { try EmbeddedBuildSettingsRule().run($0) },
 		"build_files_ordered": { try BuildFilesAreOrderedRule().run($0) },
-		"groups_sorted": { groupsAreSortedRule($0) },
+		"groups_sorted": { try GroupsAreSortedRule().run($0) },
 		"validate_build_settings": { try ValidateBuildSettingsRule().run($0) },
 		"implicit_dependencies": { try ImplicitDependenciesRule().run($0) },
 		"targets_use_xcconfig": { try TargetsUseXCConfigRule().run($0) },

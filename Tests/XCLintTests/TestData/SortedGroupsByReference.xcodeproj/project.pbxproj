@@ -1,0 +1,198 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C965BD2C2AE6E5D700E5836A /* StockMacOSAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C965BD2B2AE6E5D700E5836A /* StockMacOSAppApp.swift */; };
+		C965BD2E2AE6E5D700E5836A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C965BD2D2AE6E5D700E5836A /* ContentView.swift */; };
+		C965BD302AE6E5D800E5836A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C965BD2F2AE6E5D800E5836A /* Assets.xcassets */; };
+		C965BD332AE6E5D800E5836A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C965BD322AE6E5D800E5836A /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C965BD282AE6E5D700E5836A /* .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = .app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C965BD2B2AE6E5D700E5836A /* StockMacOSAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StockMacOSAppApp.swift; path = A/StockMacOSAppApp.swift; sourceTree = SOURCE_ROOT; };
+		C965BD2D2AE6E5D700E5836A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = SOURCE_ROOT; };
+		C965BD2F2AE6E5D800E5836A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C965BD322AE6E5D800E5836A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C965BD342AE6E5D800E5836A /* StockMacOSApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StockMacOSApp.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C965BD252AE6E5D700E5836A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C965BD1F2AE6E5D700E5836A = {
+			isa = PBXGroup;
+			children = (
+				C965BD2A2AE6E5D700E5836A /* StockMacOSApp */,
+				C965BD292AE6E5D700E5836A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C965BD292AE6E5D700E5836A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C965BD282AE6E5D700E5836A /* .app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C965BD2A2AE6E5D700E5836A /* StockMacOSApp */ = {
+			isa = PBXGroup;
+			children = (
+				C965BD2F2AE6E5D800E5836A /* Assets.xcassets */,
+				C965BD2D2AE6E5D700E5836A /* ContentView.swift */,
+				C965BD312AE6E5D800E5836A /* Preview Content */,
+				C965BD342AE6E5D800E5836A /* StockMacOSApp.entitlements */,
+				C965BD2B2AE6E5D700E5836A /* StockMacOSAppApp.swift */,
+			);
+			path = StockMacOSApp;
+			sourceTree = "<group>";
+		};
+		C965BD312AE6E5D800E5836A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				C965BD322AE6E5D800E5836A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C965BD272AE6E5D700E5836A /* StockMacOSApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C965BD372AE6E5D800E5836A /* Build configuration list for PBXNativeTarget "StockMacOSApp" */;
+			buildPhases = (
+				C965BD242AE6E5D700E5836A /* Sources */,
+				C965BD252AE6E5D700E5836A /* Frameworks */,
+				C965BD262AE6E5D700E5836A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StockMacOSApp;
+			productName = StockMacOSApp;
+			productReference = C965BD282AE6E5D700E5836A /* .app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C965BD202AE6E5D700E5836A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1510;
+				LastUpgradeCheck = 1510;
+				TargetAttributes = {
+					C965BD272AE6E5D700E5836A = {
+						CreatedOnToolsVersion = 15.1;
+					};
+				};
+			};
+			buildConfigurationList = C965BD232AE6E5D700E5836A /* Build configuration list for PBXProject "SortedGroupsByReference" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C965BD1F2AE6E5D700E5836A;
+			productRefGroup = C965BD292AE6E5D700E5836A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C965BD272AE6E5D700E5836A /* StockMacOSApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C965BD262AE6E5D700E5836A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C965BD332AE6E5D800E5836A /* Preview Assets.xcassets in Resources */,
+				C965BD302AE6E5D800E5836A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C965BD242AE6E5D700E5836A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C965BD2E2AE6E5D700E5836A /* ContentView.swift in Sources */,
+				C965BD2C2AE6E5D700E5836A /* StockMacOSAppApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C965BD352AE6E5D800E5836A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		C965BD362AE6E5D800E5836A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		C965BD382AE6E5D800E5836A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		C965BD392AE6E5D800E5836A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C965BD232AE6E5D700E5836A /* Build configuration list for PBXProject "SortedGroupsByReference" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C965BD352AE6E5D800E5836A /* Debug */,
+				C965BD362AE6E5D800E5836A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C965BD372AE6E5D800E5836A /* Build configuration list for PBXNativeTarget "StockMacOSApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C965BD382AE6E5D800E5836A /* Debug */,
+				C965BD392AE6E5D800E5836A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C965BD202AE6E5D700E5836A /* Project object */;
+}

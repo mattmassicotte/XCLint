@@ -15,7 +15,7 @@ final class GroupsAreSortedRuleTests: XCTestCase {
             configuration: Configuration()
         )
         
-        let violations = groupsAreSortedRule(env)
+		let violations = try GroupsAreSortedRule().run(env)
         XCTAssertTrue(violations.isEmpty)
     }
     
@@ -30,8 +30,23 @@ final class GroupsAreSortedRuleTests: XCTestCase {
             configuration: Configuration()
         )
         
-        let violations = groupsAreSortedRule(env)
+        let violations = try GroupsAreSortedRule().run(env)
         XCTAssertFalse(violations.isEmpty)
     }
+
+	func testProjectWithoutGroupsSortedByReference() throws {
+		let url = try Bundle.module.testDataURL(named: "SortedGroupsByReference.xcodeproj")
+
+		let project = try XcodeProj(pathString: url.path)
+
+		let env = XCLinter.Environment(
+			project: project,
+			projectRootURL: url,
+			configuration: Configuration()
+		)
+
+		let violations = try GroupsAreSortedRule().run(env)
+		XCTAssertTrue(violations.isEmpty)
+	}
 }
 
