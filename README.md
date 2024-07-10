@@ -2,7 +2,6 @@
 
 [![Build Status][build status badge]][build status]
 [![Platforms][platforms badge]][platforms]
-[![Discord][discord badge]][discord]
 
 </div>
 
@@ -86,6 +85,3 @@ By participating in this project you agree to abide by the [Contributor Code of 
 [platforms badge]: https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fmattmassicotte%2FXCLint%2Fbadge%3Ftype%3Dplatforms
 [documentation]: https://swiftpackageindex.com/mattmassicotte/XCLint/main/documentation
 [documentation badge]: https://img.shields.io/badge/Documentation-DocC-blue
-[discord]: https://discord.gg/esFpX6sErJ
-[discord badge]: https://img.shields.io/badge/Discord-purple?logo=Discord&label=Chat&color=%235A64EC
-
