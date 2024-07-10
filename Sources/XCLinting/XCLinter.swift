@@ -14,7 +14,7 @@ public struct XCLinter {
 		}
 	}
 
-	public typealias Rule = (Environment) throws -> [Violation]
+	public typealias Rule = @Sendable (Environment) throws -> [Violation]
 
 	public var environment: Environment
 	public var rules: [Rule]
@@ -76,7 +76,7 @@ extension XCLinter {
 	public static let ruleMap: [String: Rule] = [
 		"embedded_build_setting": { try EmbeddedBuildSettingsRule().run($0) },
 		"build_files_ordered": { try BuildFilesAreOrderedRule().run($0) },
-		"groups_sorted": groupsAreSortedRule,
+		"groups_sorted": { groupsAreSortedRule($0) },
 		"validate_build_settings": { try ValidateBuildSettingsRule().run($0) },
 		"implicit_dependencies": { try ImplicitDependenciesRule().run($0) },
 		"targets_use_xcconfig": { try TargetsUseXCConfigRule().run($0) },
