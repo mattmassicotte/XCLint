@@ -48,5 +48,20 @@ final class GroupsAreSortedRuleTests: XCTestCase {
 		let violations = try GroupsAreSortedRule().run(env)
 		XCTAssertTrue(violations.isEmpty)
 	}
+
+	func testGroupSortedWhereExtensionsMatters() throws {
+		let url = try Bundle.module.testDataURL(named: "FileOrderedWithExtensions.xcodeproj")
+
+		let project = try XcodeProj(pathString: url.path)
+
+		let env = XCLinter.Environment(
+			project: project,
+			projectRootURL: url,
+			configuration: Configuration()
+		)
+
+		let violations = try GroupsAreSortedRule().run(env)
+		XCTAssertTrue(violations.isEmpty)
+	}
 }
 
