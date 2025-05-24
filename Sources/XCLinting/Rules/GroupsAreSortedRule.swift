@@ -13,11 +13,11 @@ struct GroupsAreSortedRule {
 	private func validateGroupIsSorted(_ group: PBXGroup) -> [Violation] {
 		var violations = [Violation]()
 
-		// a path can contain components, but only the last matters from the UI's perspective
+		// a path can contain components, but only the last component without the extension matters from the UI's perspective
 		let children = group.children
 			.compactMap(\.path)
-			.map { $0.split(separator: "/").last }
-			.compactMap { $0 }
+			.compactMap { $0.split(separator: "/").last }
+			.compactMap { $0.split(separator: ".").first }
 
 		let sortedChildren = children.sorted { lhs, rhs in
 			lhs.compare(
