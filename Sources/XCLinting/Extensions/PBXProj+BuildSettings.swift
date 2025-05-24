@@ -2,6 +2,7 @@ import Foundation
 
 import XCConfig
 import XcodeProj
+import enum XCConfig.BuildSetting
 
 extension Parser {
 	func parse(contentsOf url: URL) throws -> [Statement] {

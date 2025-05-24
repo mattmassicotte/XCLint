@@ -14,7 +14,7 @@ extension XCBuildConfiguration {
 
 	var buildSettingsAssignments: [Assignment] {
 		buildSettings.compactMap { (key, value) -> Assignment? in
-			guard let value = value as? String else { return nil }
+			guard let value = value.stringValue else { return nil }
 
 			return Assignment(key: key, value: value)
 		}
