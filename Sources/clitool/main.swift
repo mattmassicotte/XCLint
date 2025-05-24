@@ -24,7 +24,7 @@ struct XCLintCommand: ParsableCommand {
 
 	func run() throws {
 		if version {
-			throw CleanExit.message("0.1.4")
+			throw CleanExit.message("0.1.5")
 		}
 
 		// find the xcodeproj file
