@@ -21,6 +21,7 @@ final class ValidateBuildSettingsRuleTests: XCTestCase {
 	}
 
 	func testProjectWithInvalidBuildSettings() throws {
+		// This has ALWAYS_SEARCH_USER_PATHS set to YES at the project level
 		let url = try Bundle.module.testDataURL(named: "InvalidEmbeddedBuildSettings.xcodeproj")
 
 		let project = try XcodeProj(pathString: url.path)
