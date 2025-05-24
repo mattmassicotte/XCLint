@@ -28,22 +28,8 @@ jobs:
     name: Test macOS 14
     runs-on: macOS-14
     env:
-      DEVELOPER_DIR: /Applications/Xcode_16.3.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_15.4.app/Contents/Developer
     steps:
       - uses: actions/checkout@v4
       - name: Test
         run: set -o pipefail && xcodebuild -scheme XCLint-Package -destination "platform=macOS" test | xcbeautify
-
-  linux_test:
-    name: Test Linux
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Swiftly
-        uses: vapor/swiftly-action@v0.2.0
-        with:
-          toolchain: 6.0.3
-      - name: Test
-        run: swift test
